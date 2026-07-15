@@ -46,5 +46,4 @@ parsec_1.5/src/build/config/make.stampede3_skx_intel
 
 Preliminary tests have passed for this migrated PARSEC 1.5 FDET-based AFM code.
 However, this version is still under development. Users should validate the code
-for their own systems and use cases. The user assumes all risks associated with
-compiling, running, modifying, or relying on this development version.
+for their own systems and use cases. Users use it at their own risk.
