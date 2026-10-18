@@ -27,6 +27,26 @@ This version adds support for FDET-based AFM simulation workflows, including:
 - Slab-periodic FDET support with external point charges.
 - Stampede3-oriented build configuration updates.
 
+## Update 2026-10-18
+
+The package now matches the source archive on https://parsecdev.vercel.app/code.html
+(release of 2026-10-18). Changes since the first upload:
+
+- FDET fixes: the sample point charges are no longer added to the electronic
+  ionic potential (the sample ions already act through `pot.dat`), and the
+  non-additive kinetic energy is summed over processors and scaled by h^3.
+- Warm start for AFM scans: when the tip moves by whole grid steps between
+  `minimization manual` steps, the converged density, orbitals and Hartree
+  potential are translated with it (about 3x fewer SCF steps per scan point).
+- New keywords `hartree_cg_tolerance` and `hartree_cg_criterion` for the CG
+  Poisson solver (defaults unchanged).
+- Stability updates from July 2026, gfortran portability fixes and a Windows
+  (MSYS2 UCRT64) build configuration.
+- The old prebuilt Stampede3 binary was removed. Build from source.
+
+Details and input recommendations for FDET-AFM runs are in
+`parsec_1.5/README_FDET_AFM_DF.md`.
+
 ## Usage
 
 To unpack:
