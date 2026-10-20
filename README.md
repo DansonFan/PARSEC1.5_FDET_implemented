@@ -27,6 +27,26 @@ This version adds support for FDET-based AFM simulation workflows, including:
 - Slab-periodic FDET support with external point charges.
 - Stampede3-oriented build configuration updates.
 
+## Update 2026-10-19
+
+The package matches the source archive of 2026-10-19 on
+https://parsecdev.vercel.app/code.html.
+
+- Optional tip sphere for FDET HR-AFM: with `boundary_sphere_around_tip true`
+  (default `false`) the tip is computed in its own small sphere around the tip
+  (e.g. 7.5 bohr of vacuum around a CO tip) instead of the large sphere of the
+  sample run. The frozen sample field from `pot.dat` is moved with the tip by
+  whole grid steps, without interpolation. For benzene (PBE, grid 0.4 bohr) the
+  k_ts image agrees with the large sphere within 0.4% of its range and each tip
+  position is about 10 times faster. Total energies are shifted by a constant,
+  so only energy differences are meaningful. The approximations are listed in
+  `parsec_1.5/README_FDET_AFM_DF.md`. New file `src/potential/fdet_tipsphere.F90`.
+- With the keyword off, results are the same as before (within 3e-7 Ry).
+- Checked with a full build on Ubuntu 24.04 (gfortran, OpenMPI, ScaLAPACK,
+  FFTW3) and on Windows. On Linux, compile with the FFTW3 and MPI defines
+  (`-DUSEFFTW3 -DCREATE_FFTW3_MODULE -DMPI -DUSE_SCALAPACK`) and without
+  OpenMP. The Ubuntu installer on the website writes such a configuration.
+
 ## Update 2026-10-18
 
 The package now matches the source archive on https://parsecdev.vercel.app/code.html
