@@ -27,6 +27,25 @@ This version adds support for FDET-based AFM simulation workflows, including:
 - Slab-periodic FDET support with external point charges.
 - Stampede3-oriented build configuration updates.
 
+## Update 2026-10-21
+
+The package matches the source archive of 2026-10-21 on
+https://parsecdev.vercel.app/code.html.
+
+- The tip sphere (`boundary_sphere_around_tip`) now also works with a `pot.dat`
+  from a slab sample run (`boundary_conditions slab`). The tip grid wraps around
+  the periodic cell in x and y, and the long-range interaction between the tip
+  ions and the periodic sample outside the tip sphere is summed with the 2D Ewald
+  method. Only `src/potential/fdet_tipsphere.F90` changed. Requirements, the
+  Ewald details and a NaCl(100) test are in `parsec_1.5/README_FDET_AFM_DF.md`.
+- NaCl(100) test (4-layer slab, PBE): against the same tip computed in the full
+  slab cell, energy profiles agree within 0.05 meV and k_ts within 0.3% of the
+  image range, and each tip point takes about 4.6 s instead of about 4 min.
+- Cluster runs are unchanged. Checked with a full build on Ubuntu 24.04 with the
+  Ubuntu installer from the website: test_suite TierI/0d_H2 gives -2.28491175 Ry
+  (same as the reference), and a benzene tip-sphere point gives -43.41194930 Ry,
+  identical to the Windows build.
+
 ## Update 2026-10-19
 
 The package matches the source archive of 2026-10-19 on
